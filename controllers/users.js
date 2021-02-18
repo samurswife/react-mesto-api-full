@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt');
 const User = require('../models/user');
 const { VALIDATION_ERROR_CODE, NOT_FOUND_ERROR_CODE, DEFAULT_ERROR_CODE } = require('../utils/constants');
 
@@ -24,9 +25,17 @@ const getUserById = (req, res) => {
 };
 
 const createUser = (req, res) => {
-  const { name, about, avatar } = req.body;
+  // const {
+  //   name, about, avatar, email, password,
+  // } = req.body;
 
-  User.create({ name, about, avatar })
+  bcrypt.hash(req.body.password, 10).then((hash) => User.create({
+    name: req.body.name,
+    about: req.body.about,
+    avatar: req.body.avatar,
+    email: req.body.email,
+    password: hash,
+  }))
     .then((user) => res.send(user))
     .catch((err) => {
       if (err.name === 'ValidationError') {
