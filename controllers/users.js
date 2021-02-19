@@ -1,8 +1,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
-const { Conflict, NotValidId } = require('../errors/index');
-
+const { Conflict, NotFound } = require('../errors/index');
 
 const login = (req, res, next) => {
   const { email, password } = req.body;
@@ -25,7 +24,7 @@ const getUserById = (req, res, next) => {
   const { userId } = req.params;
   User.findById(userId)
     .orFail(() => {
-      throw new NotValidId('Нет пользователя с таким ID');
+      throw new NotFound('Нет пользователя с таким ID');
     })
     .then((user) => res.send(user))
     .catch(next);
@@ -56,7 +55,7 @@ const createUser = (req, res, next) => {
 const getUserInfo = (req, res, next) => {
   User.findById(req.user._id)
     .orFail(() => {
-      throw new NotValidId('Нет пользователя с таким ID');
+      throw new NotFound('Нет пользователя с таким ID');
     })
     .then((user) => res.send(user))
     .catch(next);
@@ -74,7 +73,7 @@ const updateUserInfo = (req, res, next) => {
     },
   )
     .orFail(() => {
-      throw new NotValidId('Нет пользователя с таким ID');
+      throw new NotFound('Нет пользователя с таким ID');
     })
     .then((user) => res.send(user))
     .catch(next);
@@ -92,7 +91,7 @@ const updateUserAvatar = (req, res, next) => {
     },
   )
     .orFail(() => {
-      throw new NotValidId('Нет пользователя с таким ID');
+      throw new NotFound('Нет пользователя с таким ID');
     })
     .then((user) => res.send(user))
     .catch(next);
