@@ -7,6 +7,8 @@ const mongoose = require('mongoose');
 
 const { PORT = 3000 } = process.env;
 
+const { NotFound } = require('./errors/index');
+const errorHandler = require('./middlewares/errorHandler');
 const routerUsers = require('./routes/users');
 const routerCards = require('./routes/cards');
 const { login, createUser } = require('./controllers/users');
@@ -30,9 +32,11 @@ app.use(auth);
 
 app.use('/users', routerUsers);
 app.use('/cards', routerCards);
-app.use('*', (req, res) => {
-  res.status(404).send({ message: "Запрашиваемый ресурс не найден" });
+app.use('*', () => {
+  throw new NotFound('Запрашиваемый ресурс не найден');
 });
+
+app.use(errorHandler);
 
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);

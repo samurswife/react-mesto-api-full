@@ -1,46 +1,35 @@
 const Card = require('../models/card');
-const { VALIDATION_ERROR_CODE, NOT_FOUND_ERROR_CODE, DEFAULT_ERROR_CODE } = require('../utils/constants');
 
-const getCards = (req, res) => {
+const { NotValidId } = require('../errors/index');
+
+const getCards = (req, res, next) => {
   Card.find({})
     .populate(['owner', 'likes'])
     .then((card) => res.send(card))
-    .catch((err) => res.status(DEFAULT_ERROR_CODE).send({ message: `На сервере произошла ошибка: ${err}` }));
+    .catch(next);
 };
 
-const createCard = (req, res) => {
+const createCard = (req, res, next) => {
   const { name, link } = req.body;
   const user = req.user._id;
 
   Card.create({ name, link, owner: user })
     .then((card) => res.send(card))
-    .catch((err) => {
-      if (err.name === 'ValidationError') {
-        res.status(VALIDATION_ERROR_CODE).send({ message: `Введены некорректные данные: ${err}` });
-      } else {
-        res.status(DEFAULT_ERROR_CODE).send({ message: `На сервере произошла ошибка: ${err}` });
-      }
-    });
+    .catch(next);
 };
 
-const deleteCard = (req, res) => {
+const deleteCard = (req, res, next) => {
   const { cardId } = req.params;
 
   Card.findByIdAndRemove(cardId)
-    .orFail(new Error('NotValidId'))
+    .orFail(() => {
+      throw new NotValidId('Нет карточки с таким ID');
+    })
     .then((card) => res.send(card))
-    .catch((err) => {
-      if (err.message === 'NotValidId') {
-        res.status(NOT_FOUND_ERROR_CODE).send({ message: 'Нет карточки с таким ID' });
-      } else if (err.name === 'CastError') {
-        res.status(VALIDATION_ERROR_CODE).send({ message: 'Невалидный ID карточки' });
-      } else {
-        res.status(DEFAULT_ERROR_CODE).send({ message: `На сервере произошла ошибка: ${err}` });
-      }
-    });
+    .catch(next);
 };
 
-const likeCard = (req, res) => {
+const likeCard = (req, res, next) => {
   const { cardId } = req.params;
   const user = req.user._id;
 
@@ -49,20 +38,14 @@ const likeCard = (req, res) => {
     { $addToSet: { likes: user } },
     { new: true },
   )
-    .orFail(new Error('NotValidId'))
+    .orFail(() => {
+      throw new NotValidId('Нет карточки с таким ID');
+    })
     .then((card) => res.send(card))
-    .catch((err) => {
-      if (err.message === 'NotValidId') {
-        res.status(NOT_FOUND_ERROR_CODE).send({ message: 'Нет карточки с таким ID' });
-      } else if (err.name === 'CastError') {
-        res.status(VALIDATION_ERROR_CODE).send({ message: 'Невалидный ID карточки' });
-      } else {
-        res.status(DEFAULT_ERROR_CODE).send({ message: `На сервере произошла ошибка: ${err}` });
-      }
-    });
+    .catch(next);
 };
 
-const dislikeCard = (req, res) => {
+const dislikeCard = (req, res, next) => {
   const { cardId } = req.params;
   const user = req.user._id;
 
@@ -71,17 +54,11 @@ const dislikeCard = (req, res) => {
     { $pull: { likes: user } },
     { new: true },
   )
-    .orFail(new Error('NotValidId'))
+    .orFail(() => {
+      throw new NotValidId('Нет карточки с таким ID');
+    })
     .then((card) => res.send(card))
-    .catch((err) => {
-      if (err.message === 'NotValidId') {
-        res.status(NOT_FOUND_ERROR_CODE).send({ message: 'Нет карточки с таким ID' });
-      } else if (err.name === 'CastError') {
-        res.status(VALIDATION_ERROR_CODE).send({ message: 'Невалидный ID карточки' });
-      } else {
-        res.status(DEFAULT_ERROR_CODE).send({ message: `На сервере произошла ошибка: ${err}` });
-      }
-    });
+    .catch(next);
 };
 
 module.exports = {
