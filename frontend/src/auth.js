@@ -1,4 +1,3 @@
-// const BASE_URL = 'https://auth.nomoreparties.co';
 const BASE_URL = 'https://localhost:3000';
 
 const checkResponse = (response) => response.ok ? response.json() : response.statusCode;
