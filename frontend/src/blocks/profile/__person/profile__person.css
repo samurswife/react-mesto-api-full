@@ -1,0 +1,19 @@
+.profile__person {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 100%;
+  margin: 0 0 5px 0;
+}
+
+@media only screen and (max-width: 720px) {
+  .profile__person {
+    margin: 0 0 14px 0;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  .profile__person {
+    margin: 0;
+  }
+}

@@ -1,0 +1,17 @@
+.footer {
+  max-width: 882px;
+  padding: 66px 0 60px 0;
+}
+
+@media only screen and (max-width: 900px) {
+  .footer {
+    max-width: 90%;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  .footer {
+    max-width: 282px;
+    padding: 48px 0 36px 0;
+  }
+}

@@ -1,0 +1,14 @@
+.popup__form-input_sign-up {
+    background-color: transparent;
+    border-bottom: 2px solid #CCCCCC;
+    color: #ffffff;
+}
+
+.popup__form-input_sign-up:last-of-type {
+    margin-bottom: 216px;
+}
+
+input::-webkit-input-placeholder {color:#CCCCCC;}
+input::-moz-placeholder          {color:#CCCCCC;}
+input::-ms-input-placeholder     {color:#CCCCCC;}
+input::placeholder               {color:#CCCCCC;} 

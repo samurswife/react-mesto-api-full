@@ -1,0 +1,9 @@
+.popup__form-hint-link {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.popup__form-hint-link:hover {
+    color: rgba(255, 255, 255, 0.6);
+    transition: color ease 0.5s;
+}

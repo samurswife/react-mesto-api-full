@@ -1,0 +1,19 @@
+.profile__avatar-button {
+  background-image: url("../../../images/avatar-button.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  min-width: 26px;
+  height: 26px;
+  background-color: transparent;
+  border: none;
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.profile__avatar-button:hover {
+  cursor: pointer;
+}
+
+.profile__avatar-button:focus {
+  outline: none;
+}

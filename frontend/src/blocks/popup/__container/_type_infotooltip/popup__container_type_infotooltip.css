@@ -1,0 +1,4 @@
+.popup__container_type_infotooltip {
+    width: calc(430px - 36px - 36px);
+    padding: 60px 36px;
+}

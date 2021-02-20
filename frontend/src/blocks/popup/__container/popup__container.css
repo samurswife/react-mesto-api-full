@@ -1,0 +1,37 @@
+.popup__container {
+  background-color: #ffffff;
+  max-width: 430px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 34px 36px 36px;
+  position: relative;
+}
+
+@media only screen and (max-width: 650px) {
+  .popup__container {
+    max-width: 90%;
+    margin: 0 40px;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .popup__container {
+    max-width: 90%;
+    margin: 0 40px;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .popup__container {
+    padding: 20px;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  .popup__container {
+    padding: 30px 20px;
+    max-width: 240px;
+  }
+}

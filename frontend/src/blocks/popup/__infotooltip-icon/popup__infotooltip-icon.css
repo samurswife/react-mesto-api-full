@@ -1,0 +1,7 @@
+.popup__infotooltip-icon {
+    height: 120px;
+    background-image: url("../../../images/success.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}

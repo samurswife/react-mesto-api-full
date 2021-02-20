@@ -1,0 +1,15 @@
+.header {
+  max-width: 882px;
+  padding: 45px 0 40px;
+  border-bottom: 1px solid rgba(84, 84, 84, 0.7);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media only screen and (max-width: 320px) {
+  .header {
+    max-width: 100%;
+    padding: 28px 0 40px;
+  }
+}

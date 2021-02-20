@@ -1,0 +1,6 @@
+.popup__form-input_type_error {
+  border: 1px solid#ff0000;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}

@@ -1,0 +1,30 @@
+.popup__form-input {
+  margin: 0 0 5px;
+  padding: 0 0 13px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  font-size: 14px;
+  line-height: 1.2;
+  color: #000000;
+}
+
+.popup__form-input:focus {
+  outline: none;
+}
+
+@media only screen and (max-width: 425px) {
+  input::-webkit-input-placeholder {
+    font-size:12px;
+  }
+  input::-moz-placeholder {
+    font-size:12px;
+  }
+  input::-ms-input-placeholder {
+    font-size:12px;
+  }
+  input::placeholder {
+    font-size:12px;
+  }
+}
