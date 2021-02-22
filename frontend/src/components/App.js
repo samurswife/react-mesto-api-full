@@ -120,6 +120,7 @@ function App() {
   function getContent(token) {
     return auth.getContent(token).then((res) => {
       if (res) {
+        console.log(res);
         setUserEmail(res.data.email);
         setHeaderLink({ text: "Выйти", className: "header__link_logout", path: "/sign-in" });
         setLoggedIn(true);
