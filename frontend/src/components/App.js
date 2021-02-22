@@ -193,6 +193,16 @@ function App() {
   }
 
   React.useEffect(() => {
+    tokenCheck();
+  }, []);
+
+  React.useEffect(() => {
+    if (loggedIn) {
+      history.push("/")
+    }
+  }, [loggedIn, history]);
+
+  React.useEffect(() => {
     api.getUserInfo()
       .then(userData => {
         setCurrentUser(userData);
@@ -211,16 +221,6 @@ function App() {
         console.log(err);
       });
   }, []);
-
-  React.useEffect(() => {
-    tokenCheck();
-  }, []);
-
-  React.useEffect(() => {
-    if (loggedIn) {
-      history.push("/")
-    }
-  }, [loggedIn]);
 
   return (
     <div className="App">
