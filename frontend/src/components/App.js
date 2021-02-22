@@ -220,7 +220,7 @@ function App() {
       .catch(err => {
         console.log(err);
       });
-  }, [loggedIn]);
+  }, []);
 
   return (
     <div className="App">
