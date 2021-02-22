@@ -15,7 +15,7 @@ const options = {
     'https://shakarova.students.nomoreparties.space',
     'https://www.shakarova.students.nomoreparties.space',
     'http://shakarova.students.nomoreparties.space',
-    'http://www.shakarova.students.nomoreparties.space'
+    'http://www.shakarova.students.nomoreparties.space',
   ],
   methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
   preflightContinue: false,
