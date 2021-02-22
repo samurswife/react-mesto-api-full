@@ -1,4 +1,4 @@
-const BASE_URL = 'https://localhost:3000';
+const BASE_URL = 'https://api.shakarova.students.nomoreparties.space';
 
 const checkResponse = (response) => response.ok ? response.json() : response.statusCode;
 

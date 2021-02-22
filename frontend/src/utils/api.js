@@ -109,9 +109,8 @@ class Api {
 }
 
 const api = new Api({
-    baseUrl: 'https://localhost:3000',
+    baseUrl: 'https://api.shakarova.students.nomoreparties.space',
     headers: {
-        authorization: '0a6bff0b-1736-41fa-9351-11fa93721afd',
         'Content-Type': 'application/json'
     }
 });
