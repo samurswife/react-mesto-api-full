@@ -121,7 +121,8 @@ function App() {
     return auth.getContent(token).then((res) => {
       console.log(res);
       if (res) {
-        setUserEmail(res.data.email);
+        // setUserEmail(res.data.email);
+        setUserEmail(res.email);
         setHeaderLink({ text: "Выйти", className: "header__link_logout", path: "/sign-in" });
         setLoggedIn(true);
         history.push('/');
