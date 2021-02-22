@@ -119,7 +119,6 @@ function App() {
 
   function getContent(token) {
     return auth.getContent(token).then((res) => {
-      console.log(res);
       if (res) {
         setUserEmail(res.email);
         setHeaderLink({ text: "Выйти", className: "header__link_logout", path: "/sign-in" });
@@ -196,7 +195,6 @@ function App() {
   React.useEffect(() => {
     api.getUserInfo()
       .then(userData => {
-        console.log(userData);
         setCurrentUser(userData);
       })
       .catch(err => {
@@ -222,7 +220,7 @@ function App() {
     if (loggedIn) {
       history.push("/")
     }
-  }, [loggedIn, history]);
+  }, [loggedIn]);
 
   return (
     <div className="App">
