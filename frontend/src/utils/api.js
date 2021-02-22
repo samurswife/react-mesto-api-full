@@ -18,6 +18,7 @@ class Api {
         })
             .then(handleOriginalResponse)
             .then(data => {
+                console.log(data);
                 return data;
             });
     }
