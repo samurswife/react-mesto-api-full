@@ -125,26 +125,6 @@ function App() {
       });
   }
 
-  // React.useEffect(() => {
-  //   api.getUserInfo()
-  //     .then(userData => {
-  //       setCurrentUser(userData);
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-  // }, []);
-
-  // React.useEffect(() => {
-  //   api.loadInitialCards()
-  //     .then(initialCards => {
-  //       setCards(initialCards);
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-  // }, []);
-
   function getContent(token) {
     return auth.getContent(token).then((res) => {
       if (res) {
@@ -153,9 +133,6 @@ function App() {
         setHeaderLink({ text: "Выйти", className: "header__link_logout", path: "/sign-in" });
         setLoggedIn(true);
         history.push('/');
-      }
-    })
-      .then(() => {
         api.loadInitialCards()
           .then(initialCards => {
             setCards(initialCards);
@@ -163,7 +140,8 @@ function App() {
           .catch(err => {
             console.log(err);
           });
-      })
+      }
+    })
       .catch((error) => console.log(error));
   }
 
@@ -232,7 +210,25 @@ function App() {
     }
   }, [loggedIn, history]);
 
+  // React.useEffect(() => {
+  //   api.getUserInfo()
+  //     .then(userData => {
+  //       setCurrentUser(userData);
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     });
+  // }, []);
 
+  // React.useEffect(() => {
+  //   api.loadInitialCards()
+  //     .then(initialCards => {
+  //       setCards(initialCards);
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     });
+  // }, []);
 
   return (
     <div className="App">
