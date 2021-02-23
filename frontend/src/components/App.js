@@ -133,7 +133,6 @@ function App() {
     const token = localStorage.getItem('token');
     if (token) {
       getContent(token);
-      getUserInfo();
     }
   }
 
@@ -160,7 +159,6 @@ function App() {
         if (res.token) {
           localStorage.setItem('token', res.token);
           getContent(res.token);
-          getUserInfo();
         }
       })
       .catch((error) => console.log(error));
@@ -204,35 +202,25 @@ function App() {
     }
   }, [loggedIn, history]);
 
-  function getUserInfo() {
-    return api.getUserInfo()
+  React.useEffect(() => {
+    api.getUserInfo()
       .then(userData => {
         setCurrentUser(userData);
       })
       .catch(err => {
         console.log(err);
       });
-  }
+  }, []);
 
-  // React.useEffect(() => {
-  //   api.getUserInfo()
-  //     .then(userData => {
-  //       setCurrentUser(userData);
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-  // }, []);
-
-  // React.useEffect(() => {
-  //   api.loadInitialCards()
-  //     .then(initialCards => {
-  //       setCards(initialCards);
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-  // }, []);
+  React.useEffect(() => {
+    api.loadInitialCards()
+      .then(initialCards => {
+        setCards(initialCards);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <div className="App">
