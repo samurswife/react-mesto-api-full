@@ -129,8 +129,6 @@ function App() {
     return auth.getContent(token).then((res) => {
       if (res) {
         setUserEmail(res.email);
-        getUserInfo();
-        loadInitialCards();
         setHeaderLink({ text: "Выйти", className: "header__link_logout", path: "/sign-in" });
         setLoggedIn(true);
         history.push('/');
@@ -204,53 +202,25 @@ function App() {
     }
   }, [loggedIn, history]);
 
-function getUserInfo(){
-  return api.getUserInfo()
-  .then(userData => {
-    setCurrentUser(userData);
-  })
-  .catch(err => {
-    console.log(err);
-  });
-}
+  React.useEffect(() => {
+    api.getUserInfo()
+      .then(userData => {
+        setCurrentUser(userData);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, []);
 
-React.useEffect(() => {
-  getUserInfo()
-},[]);
-
-  // React.useEffect(() => {
-  //   api.getUserInfo()
-  //     .then(userData => {
-  //       setCurrentUser(userData);
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-  // }, []);
-
-  function loadInitialCards(){
-    return api.loadInitialCards()
-    .then(initialCards => {
-      setCards(initialCards);
-    })
-    .catch(err => {
-      console.log(err);
-    });
-  }
-
-  React.useEffect(()=> {
-    loadInitialCards();
-  })
-
-  // React.useEffect(() => {
-  //   api.loadInitialCards()
-  //     .then(initialCards => {
-  //       setCards(initialCards);
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-  // }, []);
+  React.useEffect(() => {
+    api.loadInitialCards()
+      .then(initialCards => {
+        setCards(initialCards);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <div className="App">
