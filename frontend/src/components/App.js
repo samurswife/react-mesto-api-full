@@ -133,13 +133,6 @@ function App() {
         setHeaderLink({ text: "Выйти", className: "header__link_logout", path: "/sign-in" });
         setLoggedIn(true);
         history.push('/');
-        api.loadInitialCards()
-          .then(initialCards => {
-            setCards(initialCards);
-          })
-          .catch(err => {
-            console.log(err);
-          });
       }
     })
       .catch((error) => console.log(error));
@@ -189,6 +182,7 @@ function App() {
       setHeaderLink({ text: "Регистрация", className: "", path: "/sign-up" });
     } else if (headerLink.text === "Выйти") {
       localStorage.removeItem('token');
+      setLoggedIn(false);
       history.push('/sign-in');
       setHeaderLink({ text: "Регистрация", className: "", path: "/sign-up" });
       setUserEmail("");
