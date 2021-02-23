@@ -210,7 +210,7 @@ function App() {
       .catch(err => {
         console.log(err);
       });
-  }, []);
+  }, [loggedIn, history]);
 
   React.useEffect(() => {
     api.loadInitialCards()
@@ -220,7 +220,7 @@ function App() {
       .catch(err => {
         console.log(err);
       });
-  }, []);
+  }, [loggedIn, history]);
 
   return (
     <div className="App">
