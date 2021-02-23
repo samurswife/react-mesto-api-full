@@ -55,7 +55,7 @@ app.use(auth);
 
 app.use('/users', routerUsers);
 app.use('/cards', routerCards);
-app.use('*', () => {
+app.use('/*', () => {
   throw new NotFound('Запрашиваемый ресурс не найден');
 });
 
