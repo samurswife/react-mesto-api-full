@@ -30,9 +30,17 @@ function App() {
   const [infoTooltipType, setInfoTooltipType] = React.useState("");
   const [headerLink, setHeaderLink] = React.useState({ text: "Регистрация", className: "", path: "sign-up" });
 
+  const [token, setToken] = React.useState('');
+
   const history = useHistory();
 
-  let api; //
+  let api = new Api({
+      baseUrl: 'https://api.shakarova.students.nomoreparties.space',
+      headers: {
+        'Content-Type': 'application/json',
+        "Authorization": `Bearer ${token}`
+      }
+    });
 
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);
@@ -129,13 +137,14 @@ function App() {
   }
 
   function getContent(token) {
-    api = new Api({
-      baseUrl: 'https://api.shakarova.students.nomoreparties.space',
-      headers: {
-        'Content-Type': 'application/json',
-        "Authorization": `Bearer ${localStorage.getItem('token')}`
-      }
-    });
+    // api = new Api({
+    //   baseUrl: 'https://api.shakarova.students.nomoreparties.space',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     "Authorization": `Bearer ${localStorage.getItem('token')}`
+    //   }
+    // });
+
     return auth.getContent(token).then((res) => {
       if (res) {
         setCurrentUser(res);
@@ -153,9 +162,6 @@ function App() {
           .catch(err => {
             console.log(err);
           });
-      })
-      .then(() => {
-        return api;
       })
       .catch((error) => console.log(error));
   }
@@ -189,6 +195,7 @@ function App() {
       .then((res) => {
         if (res.token) {
           localStorage.setItem('token', res.token);
+          setToken(res.token);
           getContent(res.token);
         }
       })
