@@ -154,6 +154,9 @@ function App() {
             console.log(err);
           });
       })
+      .then(() => {
+        return api;
+      })
       .catch((error) => console.log(error));
   }
 
