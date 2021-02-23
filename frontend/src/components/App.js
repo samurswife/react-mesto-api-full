@@ -130,6 +130,15 @@ function App() {
       if (res) {
         setCurrentUser(res);
         setUserEmail(res.email);
+
+        api.loadInitialCards()
+          .then(initialCards => {
+            setCards(initialCards);
+          })
+          .catch(err => {
+            console.log(err);
+          });
+
         setHeaderLink({ text: "Выйти", className: "header__link_logout", path: "/sign-in" });
         setLoggedIn(true);
         history.push('/');
