@@ -133,6 +133,8 @@ function App() {
     const token = localStorage.getItem('token');
     if (token) {
       getContent(token);
+      getUserInfo();
+      loadInitialCards();
     }
   }
 
@@ -160,7 +162,7 @@ function App() {
           localStorage.setItem('token', res.token);
           getContent(res.token);
           getUserInfo();
-          loadInitialCards();        
+          loadInitialCards();
         }
       })
       .catch((error) => console.log(error));
