@@ -5,7 +5,8 @@ import Main from "./Main.js";
 import Footer from "./Footer.js";
 import EditProfilePopup from "./EditProfilePopup.js";
 import ImagePopup from "./ImagePopup.js";
-import { api } from "../utils/api.js";
+// import { api } from "../utils/api.js";
+import { Api } from "../utils/api"; //
 import { CurrentUserContext } from "../context/CurrentUserContext";
 import EditAvatarPopup from './EditAvatarPopup.js';
 import AddPlacePopup from './AddPlacePopup.js';
@@ -28,6 +29,10 @@ function App() {
   const [userEmail, setUserEmail] = React.useState("");
   const [infoTooltipType, setInfoTooltipType] = React.useState("");
   const [headerLink, setHeaderLink] = React.useState({ text: "Регистрация", className: "", path: "sign-up" });
+
+  const [token, setToken] = React.useState(""); //
+
+  let api; //
 
   const history = useHistory();
 
@@ -176,6 +181,16 @@ function App() {
       .then((res) => {
         if (res.token) {
           localStorage.setItem('token', res.token);
+          setToken(res.token); //
+
+          api = new Api({ //
+            baseUrl: 'https://api.shakarova.students.nomoreparties.space',
+            headers: {
+                'Content-Type': 'application/json',
+                "Authorization": `Bearer ${token}`
+            }
+        });
+
           getContent(res.token);
         }
       })
