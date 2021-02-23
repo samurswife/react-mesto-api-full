@@ -134,24 +134,6 @@ function App() {
         history.push('/');
       }
     })
-      .then(() => {
-        api.getUserInfo()
-          .then(userData => {
-            setCurrentUser(userData);
-          })
-          .catch(err => {
-            console.log(err);
-          });
-
-        api.loadInitialCards()
-          .then(initialCards => {
-            setCards(initialCards);
-          })
-          .catch(err => {
-            console.log(err);
-          });
-      }
-      )
       .catch((error) => console.log(error));
   }
 
@@ -220,25 +202,25 @@ function App() {
     }
   }, [loggedIn, history]);
 
-  // React.useEffect(() => {
-  //   api.getUserInfo()
-  //     .then(userData => {
-  //       setCurrentUser(userData);
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-  // }, []);
+  React.useEffect(() => {
+    api.getUserInfo()
+      .then(userData => {
+        setCurrentUser(userData);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, []);
 
-  // React.useEffect(() => {
-  //   api.loadInitialCards()
-  //     .then(initialCards => {
-  //       setCards(initialCards);
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-  // }, []);
+  React.useEffect(() => {
+    api.loadInitialCards()
+      .then(initialCards => {
+        setCards(initialCards);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <div className="App">
