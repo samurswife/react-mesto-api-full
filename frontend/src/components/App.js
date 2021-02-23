@@ -144,7 +144,7 @@ function App() {
     //     "Authorization": `Bearer ${localStorage.getItem('token')}`
     //   }
     // });
-
+    setToken(token);
     return auth.getContent(token).then((res) => {
       if (res) {
         setCurrentUser(res);
@@ -195,7 +195,6 @@ function App() {
       .then((res) => {
         if (res.token) {
           localStorage.setItem('token', res.token);
-          setToken(res.token);
           getContent(res.token);
         }
       })
