@@ -122,7 +122,7 @@ function App() {
       if (res) {
         setUserEmail(res.email);
         setHeaderLink({ text: "Выйти", className: "header__link_logout", path: "/sign-in" });
-        // setLoggedIn(true);
+        setLoggedIn(true);
         history.push('/');
       }
     })
@@ -132,10 +132,7 @@ function App() {
   function tokenCheck() {
     const token = localStorage.getItem('token');
     if (token) {
-      setLoggedIn(true);
       getContent(token);
-      getUserInfo();
-      loadInitialCards();
     }
   }
 
@@ -160,11 +157,8 @@ function App() {
     return auth.authorize(email, password)
       .then((res) => {
         if (res.token) {
-          setLoggedIn(true);
           localStorage.setItem('token', res.token);
           getContent(res.token);
-          getUserInfo();
-          loadInitialCards();
         }
       })
       .catch((error) => console.log(error));
@@ -200,7 +194,7 @@ function App() {
 
   React.useEffect(() => {
     tokenCheck();
-  }, [loggedIn]);
+  }, []);
 
   React.useEffect(() => {
     if (loggedIn) {
@@ -208,44 +202,25 @@ function App() {
     }
   }, [loggedIn, history]);
 
-  function getUserInfo() {
-    return api.getUserInfo()
+  React.useEffect(() => {
+    api.getUserInfo()
       .then(userData => {
         setCurrentUser(userData);
       })
       .catch(err => {
         console.log(err);
       });
-  }
+  }, []);
 
-  function loadInitialCards() {
-    return api.loadInitialCards()
+  React.useEffect(() => {
+    api.loadInitialCards()
       .then(initialCards => {
         setCards(initialCards);
       })
       .catch(err => {
         console.log(err);
       });
-  }
-  // React.useEffect(() => {
-  //   api.getUserInfo()
-  //     .then(userData => {
-  //       setCurrentUser(userData);
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-  // }, []);
-
-  // React.useEffect(() => {
-  //   api.loadInitialCards()
-  //     .then(initialCards => {
-  //       setCards(initialCards);
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-  // }, []);
+  }, []);
 
   return (
     <div className="App">
