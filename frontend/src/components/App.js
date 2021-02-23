@@ -133,8 +133,9 @@ function App() {
       baseUrl: 'https://api.shakarova.students.nomoreparties.space',
       headers: {
         'Content-Type': 'application/json',
-        "Authorization": `Bearer ${token}`
-      });
+        "Authorization": `Bearer ${localStorage.getItem('token')}`
+      }
+    });
     return auth.getContent(token).then((res) => {
       if (res) {
         setCurrentUser(res);
