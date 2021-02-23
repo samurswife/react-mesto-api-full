@@ -205,7 +205,7 @@ function App() {
   }, [loggedIn, history]);
 
   function getUserInfo() {
-    return getUserInfo()
+    return api.getUserInfo()
       .then(userData => {
         setCurrentUser(userData);
       })
