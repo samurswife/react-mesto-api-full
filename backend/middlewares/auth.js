@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const { Forbidden } = require('../errors/index');
+const { Forbidden, Unauthorized } = require('../errors/index');
 
 module.exports = (req, res, next) => {
   const { authorization } = req.headers;
@@ -15,7 +15,7 @@ module.exports = (req, res, next) => {
   try {
     payload = jwt.verify(token, 'b18d360a0cc0c48434f7db51d7b6952e395eaeb95cbe67aab2160e6f70852ea5');
   } catch (err) {
-    throw new Forbidden('Необходима авторизация.');
+    throw new Unauthorized('Переданы неверные данные при авторизации.');
   }
 
   req.user = payload;

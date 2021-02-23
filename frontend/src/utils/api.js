@@ -5,6 +5,8 @@ const handleOriginalResponse = (res) => {
     return Promise.reject(`Ошибка: ${res.status}`);
 }
 
+cconst token = localStorage.getItem('token');
+
 class Api {
     constructor(config) {
         this._url = config.baseUrl;
@@ -18,7 +20,6 @@ class Api {
         })
             .then(handleOriginalResponse)
             .then(data => {
-                console.log(data);
                 return data;
             });
     }
@@ -113,6 +114,7 @@ const api = new Api({
     baseUrl: 'https://api.shakarova.students.nomoreparties.space',
     headers: {
         'Content-Type': 'application/json',
+        "Authorization": `Bearer ${token}`
     }
 });
 

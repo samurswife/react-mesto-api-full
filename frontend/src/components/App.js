@@ -126,7 +126,7 @@ function App() {
         history.push('/');
       }
     })
-    .catch((error) => console.log(error));
+      .catch((error) => console.log(error));
   }
 
   function tokenCheck() {
@@ -202,25 +202,44 @@ function App() {
     }
   }, [loggedIn, history]);
 
-  React.useEffect(() => {
-    api.getUserInfo()
+  function getUserInfo() {
+    return api.getUserInfo()
       .then(userData => {
         setCurrentUser(userData);
       })
       .catch(err => {
         console.log(err);
       });
-  }, []);
+  }
 
-  React.useEffect(() => {
-    api.loadInitialCards()
+  function loadInitialCards() {
+    return api.loadInitialCards()
       .then(initialCards => {
         setCards(initialCards);
       })
       .catch(err => {
         console.log(err);
       });
-  }, []);
+  }
+  // React.useEffect(() => {
+  //   api.getUserInfo()
+  //     .then(userData => {
+  //       setCurrentUser(userData);
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     });
+  // }, []);
+
+  // React.useEffect(() => {
+  //   api.loadInitialCards()
+  //     .then(initialCards => {
+  //       setCards(initialCards);
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     });
+  // }, []);
 
   return (
     <div className="App">
