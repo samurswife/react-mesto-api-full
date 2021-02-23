@@ -94,6 +94,14 @@ function App() {
       });
   }
 
+  function closeAllPopups() {
+    setIsEditProfilePopupOpen(false);
+    setIsEditAvatarPopupOpen(false);
+    setIsAddPlacePopupOpen(false);
+    setIsInfoTooltipPopupOpen(false);
+    setSelectedCard({});
+  }
+
   function handleCardLike(card) {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
     api.changeLikeCardStatus(card._id, !isLiked)
@@ -121,6 +129,8 @@ function App() {
     return auth.getContent(token).then((res) => {
       if (res) {
         setUserEmail(res.email);
+        getUserInfo();
+        loadInitialCards();
         setHeaderLink({ text: "Выйти", className: "header__link_logout", path: "/sign-in" });
         setLoggedIn(true);
         history.push('/');
@@ -184,14 +194,6 @@ function App() {
     setHeaderLink({ text: "Регистрация", className: "", path: "/sign-up" });
   }
 
-  function closeAllPopups() {
-    setIsEditProfilePopupOpen(false);
-    setIsEditAvatarPopupOpen(false);
-    setIsAddPlacePopupOpen(false);
-    setIsInfoTooltipPopupOpen(false);
-    setSelectedCard({});
-  }
-
   React.useEffect(() => {
     tokenCheck();
   }, []);
@@ -202,25 +204,53 @@ function App() {
     }
   }, [loggedIn, history]);
 
-  React.useEffect(() => {
-    api.getUserInfo()
-      .then(userData => {
-        setCurrentUser(userData);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }, [loggedIn, history]);
+function getUserInfo(){
+  return api.getUserInfo()
+  .then(userData => {
+    setCurrentUser(userData);
+  })
+  .catch(err => {
+    console.log(err);
+  });
+}
 
-  React.useEffect(() => {
-    api.loadInitialCards()
-      .then(initialCards => {
-        setCards(initialCards);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }, [loggedIn, history]);
+React.useEffect(() => {
+  getUserInfo()
+},[]);
+
+  // React.useEffect(() => {
+  //   api.getUserInfo()
+  //     .then(userData => {
+  //       setCurrentUser(userData);
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     });
+  // }, []);
+
+  function loadInitialCards(){
+    return api.loadInitialCards()
+    .then(initialCards => {
+      setCards(initialCards);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+  }
+
+  React.useEffect(()=> {
+    loadInitialCards();
+  })
+
+  // React.useEffect(() => {
+  //   api.loadInitialCards()
+  //     .then(initialCards => {
+  //       setCards(initialCards);
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     });
+  // }, []);
 
   return (
     <div className="App">
