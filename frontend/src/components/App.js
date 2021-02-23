@@ -157,8 +157,10 @@ function App() {
     return auth.authorize(email, password)
       .then((res) => {
         if (res.token) {
-          getContent(res.token);
           localStorage.setItem('token', res.token);
+          getContent(res.token);
+          getUserInfo();
+          loadInitialCards();        
         }
       })
       .catch((error) => console.log(error));

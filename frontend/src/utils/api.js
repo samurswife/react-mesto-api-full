@@ -5,7 +5,7 @@ const handleOriginalResponse = (res) => {
     return Promise.reject(`Ошибка: ${res.status}`);
 }
 
-cconst token = localStorage.getItem('token');
+const token = localStorage.getItem('token');
 
 class Api {
     constructor(config) {
