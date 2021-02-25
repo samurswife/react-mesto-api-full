@@ -32,9 +32,12 @@ function App() {
 
   const history = useHistory();
 
+  const [token, setToken] = React.useState('');
+
   let api = new Api({
     baseUrl: 'https://api.shakarova.students.nomoreparties.space',
-    headers: {}
+    headers: {'Content-Type': 'application/json',
+    'Authorization': `Bearer ${token}`}
   });
 
   function handleEditProfileClick() {
@@ -137,6 +140,7 @@ function App() {
       .then((res) => {
         if (res.token) {
           localStorage.setItem('token', res.token);
+          setToken(res.token);
           getContent(res.token);
         }
       })
@@ -145,21 +149,13 @@ function App() {
 
   function getContent(token) {
     
-    api.headers = {
-              'Content-Type': 'application/json',
-              "Authorization": `Bearer ${localStorage.getItem('token')}`
-            };
+    // api.headers = {
+    //           'Content-Type': 'application/json',
+    //           "Authorization": `Bearer ${token}`
+    //         };
         console.log(api);
 
         loadInitialCards();
-
-    // api = new Api({
-    //   baseUrl: 'https://api.shakarova.students.nomoreparties.space',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     "Authorization": `Bearer ${token}`
-    //   }
-    // });
 
     return auth.getContent(token).then((res) => {
       if (res) {
