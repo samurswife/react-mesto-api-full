@@ -144,14 +144,14 @@ function App() {
   }
 
   function getContent(token) {
-    
-    api.headers = {
-              'Content-Type': 'application/json',
-              "Authorization": `Bearer ${token}`
-            };
-        console.log(api);
 
-        loadInitialCards(api);
+    api.headers = {
+      'Content-Type': 'application/json',
+      "Authorization": `Bearer ${token}`
+    };
+    console.log(api);
+    debugger;
+    loadInitialCards(api);
 
     return auth.getContent(token).then((res) => {
       if (res) {
