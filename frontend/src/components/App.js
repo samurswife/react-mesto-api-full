@@ -151,7 +151,7 @@ function App() {
       .catch((error) => console.log(error));
   }
 
-  const setTokenAndApi = (token) => {
+  function setTokenAndApi(token) {
     setToken(token);
     console.log(token);
     api.headers["Authorization"] = `Bearer ${token}`;
