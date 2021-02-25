@@ -36,7 +36,6 @@ function App() {
     baseUrl: 'https://api.shakarova.students.nomoreparties.space',
     headers: {}
   });
-  console.log(api);
 
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);
@@ -144,19 +143,11 @@ function App() {
       .catch((error) => console.log(error));
   }
 
-  // function setApiHeaders(token) {
-  //   api.headers = {
-  //         'Content-Type': 'application/json',
-  //         "Authorization": `Bearer ${token}`
-  //       };
-  //   console.log(api);
-  // }
-
   function getContent(token) {
     
     api.headers = {
               'Content-Type': 'application/json',
-              "Authorization": `Bearer ${token}`
+              "Authorization": `Bearer ${localStorage.getItem('token')}`
             };
         console.log(api);
 
