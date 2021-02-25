@@ -152,7 +152,8 @@ function App() {
   function setTokenAndApi(token) {
     setToken(token);
     console.log(token);
-    api.headers["Authorization"] = `Bearer ${token}`;
+    console.log(api);
+    api.headers['Authorization'] = `Bearer ${token}`;
     // api = new Api({
     //   baseUrl: 'https://api.shakarova.students.nomoreparties.space',
     //   headers: {
