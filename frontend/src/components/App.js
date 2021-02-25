@@ -140,7 +140,7 @@ function App() {
 
   function getContent(token) {
     
-    setToken(token);
+    // setToken(token);
     console.log(token);
     console.log(api);
 
@@ -203,6 +203,7 @@ function App() {
     return auth.authorize(email, password)
       .then((res) => {
         if (res.token) {
+          setToken(res.token);
           localStorage.setItem('token', res.token);
           getContent(res.token);
         }
