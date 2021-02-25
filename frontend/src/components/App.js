@@ -42,7 +42,16 @@ function App() {
   //     }
   //   });
 
-  let api;
+  // let api;
+
+  const [api, setApi] = React.useState(new Api({
+    baseUrl: 'https://api.shakarova.students.nomoreparties.space',
+      headers: {
+        'Content-Type': 'application/json',
+        "Authorization": `Bearer `
+      }
+    }
+  });
 
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);
@@ -140,17 +149,24 @@ function App() {
 
   function getContent(token) {
     
-    // setToken(token);
+    setToken(token);
     console.log(token);
+    setApi({
+        baseUrl: 'https://api.shakarova.students.nomoreparties.space',
+        headers: {
+          'Content-Type': 'application/json',
+          "Authorization": `Bearer ${token}`
+        }
+      });
     console.log(api);
 
-    api = new Api({
-      baseUrl: 'https://api.shakarova.students.nomoreparties.space',
-      headers: {
-        'Content-Type': 'application/json',
-        "Authorization": `Bearer ${localStorage.getItem('token')}`
-      }
-    });
+    // api = new Api({
+    //   baseUrl: 'https://api.shakarova.students.nomoreparties.space',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     "Authorization": `Bearer ${token}`
+    //   }
+    // });
 
     console.log(api);
 
@@ -203,7 +219,6 @@ function App() {
     return auth.authorize(email, password)
       .then((res) => {
         if (res.token) {
-          setToken(res.token);
           localStorage.setItem('token', res.token);
           getContent(res.token);
         }
