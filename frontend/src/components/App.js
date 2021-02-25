@@ -143,8 +143,6 @@ function App() {
       .then((res) => {
         if (res.token) {
           localStorage.setItem('token', res.token);
-          // setToken(res.token);
-          setTokenAndApi(res.token);
           getContent(res.token);
         }
       })
@@ -168,9 +166,10 @@ function App() {
   function getContent(token) {
     
     // setToken(token);
-    // console.log(token);
+    console.log(token);
+    setTokenAndApi(token);
 
-    // console.log(api);
+    console.log(api);
 
     // api = new Api({
     //   baseUrl: 'https://api.shakarova.students.nomoreparties.space',
