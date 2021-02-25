@@ -50,8 +50,7 @@ function App() {
         'Content-Type': 'application/json',
         "Authorization": `Bearer `
       }
-    }
-  });
+    }));
 
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);
