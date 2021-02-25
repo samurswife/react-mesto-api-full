@@ -34,23 +34,14 @@ function App() {
 
   const history = useHistory();
 
-  // let api = new Api({
-  //     baseUrl: 'https://api.shakarova.students.nomoreparties.space',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       "Authorization": `Bearer ${token}`
-  //     }
-  //   });
-
-  // let api;
-
-  const [api, setApi] = React.useState(new Api({
+  let api = new Api({
     baseUrl: 'https://api.shakarova.students.nomoreparties.space',
-      headers: {
-        'Content-Type': 'application/json',
-        "Authorization": `Bearer `
-      }
-    }));
+    headers: {
+      'Content-Type': 'application/json',
+      // "Authorization": `Bearer `
+    }
+  });
+  console.log(api);
 
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);
@@ -146,18 +137,40 @@ function App() {
       });
   }
 
+  function handleLogin(data) {
+    const { email, password } = data;
+    return auth.authorize(email, password)
+      .then((res) => {
+        if (res.token) {
+          localStorage.setItem('token', res.token);
+          // setToken(res.token);
+          setTokenAndApi(res.token);
+          getContent(res.token);
+        }
+      })
+      .catch((error) => console.log(error));
+  }
+
+  const setTokenAndApi = (token) => {
+    setToken(token);
+    console.log(token);
+    api.headers["Authorization"] = `Bearer ${token}`;
+    // api = new Api({
+    //   baseUrl: 'https://api.shakarova.students.nomoreparties.space',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     "Authorization": `Bearer ${token}`
+    //   }
+    // });
+    console.log(api);
+  }
+
   function getContent(token) {
     
     // setToken(token);
-    console.log(token);
-    setApi({
-        baseUrl: 'https://api.shakarova.students.nomoreparties.space',
-        headers: {
-          'Content-Type': 'application/json',
-          "Authorization": `Bearer ${token}`
-        }
-      });
-    console.log(api);
+    // console.log(token);
+
+    // console.log(api);
 
     // api = new Api({
     //   baseUrl: 'https://api.shakarova.students.nomoreparties.space',
@@ -207,19 +220,6 @@ function App() {
         handleInfoTooltipType("success");
         handleInfoTooltip();
         return res;
-      })
-      .catch((error) => console.log(error));
-  }
-
-  function handleLogin(data) {
-    const { email, password } = data;
-    return auth.authorize(email, password)
-      .then((res) => {
-        if (res.token) {
-          localStorage.setItem('token', res.token);
-          setToken(res.token);
-          getContent(res.token);
-        }
       })
       .catch((error) => console.log(error));
   }
