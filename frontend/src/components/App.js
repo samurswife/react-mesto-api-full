@@ -30,16 +30,11 @@ function App() {
   const [infoTooltipType, setInfoTooltipType] = React.useState("");
   const [headerLink, setHeaderLink] = React.useState({ text: "Регистрация", className: "", path: "sign-up" });
 
-  const [token, setToken] = React.useState('');
-
   const history = useHistory();
 
   let api = new Api({
     baseUrl: 'https://api.shakarova.students.nomoreparties.space',
-    headers: {
-      'Content-Type': 'application/json',
-      // "Authorization": `Bearer `
-    }
+    headers: {}
   });
   console.log(api);
 
@@ -149,31 +144,21 @@ function App() {
       .catch((error) => console.log(error));
   }
 
-  function setTokenAndApi(token) {
-    setToken(token);
-    console.log(token);
-    console.log(api);
-    api.headers = {
-          'Content-Type': 'application/json',
-          "Authorization": `Bearer ${token}`
-        };
-    // api = new Api({
-    //   baseUrl: 'https://api.shakarova.students.nomoreparties.space',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     "Authorization": `Bearer ${token}`
-    //   }
-    // });
-    console.log(api);
-  }
+  // function setApiHeaders(token) {
+  //   api.headers = {
+  //         'Content-Type': 'application/json',
+  //         "Authorization": `Bearer ${token}`
+  //       };
+  //   console.log(api);
+  // }
 
   function getContent(token) {
     
-    // setToken(token);
-    console.log(token);
-    setTokenAndApi(token);
-
-    console.log(api);
+    api.headers = {
+              'Content-Type': 'application/json',
+              "Authorization": `Bearer ${token}`
+            };
+        console.log(api);
 
     // api = new Api({
     //   baseUrl: 'https://api.shakarova.students.nomoreparties.space',
