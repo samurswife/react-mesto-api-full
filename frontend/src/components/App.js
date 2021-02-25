@@ -148,7 +148,7 @@ function App() {
 
   function getContent(token) {
     
-    setToken(token);
+    // setToken(token);
     console.log(token);
     setApi({
         baseUrl: 'https://api.shakarova.students.nomoreparties.space',
@@ -166,8 +166,6 @@ function App() {
     //     "Authorization": `Bearer ${token}`
     //   }
     // });
-
-    console.log(api);
 
     return auth.getContent(token).then((res) => {
       if (res) {
@@ -219,6 +217,7 @@ function App() {
       .then((res) => {
         if (res.token) {
           localStorage.setItem('token', res.token);
+          setToken(res.token);
           getContent(res.token);
         }
       })
