@@ -151,6 +151,8 @@ function App() {
             };
         console.log(api);
 
+        loadInitialCards();
+
     // api = new Api({
     //   baseUrl: 'https://api.shakarova.students.nomoreparties.space',
     //   headers: {
@@ -168,16 +170,17 @@ function App() {
         history.push('/');
       }
     })
-    .then(() => {
-      api.loadInitialCards()
+      .catch((error) => console.log(error));
+  }
+
+  function loadInitialCards() {
+    return api.loadInitialCards()
       .then(initialCards => {
         setCards(initialCards);
       })
       .catch(err => {
         console.log(err);
       });
-    })
-      .catch((error) => console.log(error));
   }
 
   function tokenCheck() {
