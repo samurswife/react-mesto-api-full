@@ -34,13 +34,15 @@ function App() {
 
   const history = useHistory();
 
-  let api = new Api({
-      baseUrl: 'https://api.shakarova.students.nomoreparties.space',
-      headers: {
-        'Content-Type': 'application/json',
-        "Authorization": `Bearer ${token}`
-      }
-    });
+  // let api = new Api({
+  //     baseUrl: 'https://api.shakarova.students.nomoreparties.space',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       "Authorization": `Bearer ${token}`
+  //     }
+  //   });
+
+  let api;
 
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);
@@ -137,16 +139,21 @@ function App() {
   }
 
   function getContent(token) {
-    // api = new Api({
-    //   baseUrl: 'https://api.shakarova.students.nomoreparties.space',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     "Authorization": `Bearer ${localStorage.getItem('token')}`
-    //   }
-    // });
+    
     setToken(token);
     console.log(token);
     console.log(api);
+
+    api = new Api({
+      baseUrl: 'https://api.shakarova.students.nomoreparties.space',
+      headers: {
+        'Content-Type': 'application/json',
+        "Authorization": `Bearer ${localStorage.getItem('token')}`
+      }
+    });
+
+    console.log(api);
+
     return auth.getContent(token).then((res) => {
       if (res) {
         setCurrentUser(res);
