@@ -166,9 +166,6 @@ function App() {
         setHeaderLink({ text: "Выйти", className: "header__link_logout", path: "/sign-in" });
         setLoggedIn(true);
         history.push('/');
-      }
-    })
-      .then(() => {
         api.loadInitialCards()
           .then(initialCards => {
             setCards(initialCards);
@@ -176,7 +173,8 @@ function App() {
           .catch(err => {
             console.log(err);
           });
-      })
+      }
+    })
       .catch((error) => console.log(error));
   }
 
