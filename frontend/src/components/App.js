@@ -145,6 +145,8 @@ function App() {
     //   }
     // });
     setToken(token);
+    console.log(token);
+    console.log(api);
     return auth.getContent(token).then((res) => {
       if (res) {
         setCurrentUser(res);
