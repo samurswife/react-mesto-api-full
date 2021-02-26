@@ -158,6 +158,7 @@ function App() {
         'Authorization': `Bearer ${token}`
       }
     }
+    return api;
   }
 
   function getContent(token) {
