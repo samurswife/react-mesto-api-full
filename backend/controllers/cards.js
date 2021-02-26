@@ -32,7 +32,7 @@ const deleteCard = (req, res, next) => {
 const likeCard = (req, res, next) => {
   const { cardId } = req.params;
   // const user = req.user._id;
-  const user = req.user._id;
+  const { user } = req.user;
 
   Card.findByIdAndUpdate(
     cardId,
