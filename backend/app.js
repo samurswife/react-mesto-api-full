@@ -17,7 +17,7 @@ const options = {
   //   'http://shakarova.students.nomoreparties.space',
   //   'http://www.shakarova.students.nomoreparties.space',
   // ],
-  origin: "",
+  origin: "*",
   methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
   preflightContinue: false,
   optionsSuccessStatus: 204,
