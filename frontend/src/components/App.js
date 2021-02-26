@@ -30,11 +30,16 @@ function App() {
   const [infoTooltipType, setInfoTooltipType] = React.useState("");
   const [headerLink, setHeaderLink] = React.useState({ text: "Регистрация", className: "", path: "sign-up" });
 
+  const [token, setToken] = React.useState('');
+
   const history = useHistory();
 
   let api = new Api({
     baseUrl: 'https://api.shakarova.students.nomoreparties.space',
-    headers: {}
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    }
   });
 
   function handleEditProfileClick() {
@@ -110,6 +115,7 @@ function App() {
 
   function handleCardLike(card) {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
+    console.log(api);
     api.changeLikeCardStatus(card._id, !isLiked)
       .then((newCard) => {
         const newCards = cards.map((c) => c._id === card._id ? newCard : c);
@@ -137,20 +143,31 @@ function App() {
       .then((res) => {
         if (res.token) {
           localStorage.setItem('token', res.token);
+          setApiAuth(res.token);
           getContent(res.token);
         }
       })
       .catch((error) => console.log(error));
   }
 
-  function getContent(token) {
+  function setApiAuth(token) {
+    api._headers = {
+      baseUrl: 'https://api.shakarova.students.nomoreparties.space',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
+    }
+  }
 
-    api.headers = {
-      'Content-Type': 'application/json',
-      "Authorization": `Bearer ${token}`
-    };
+  function getContent(token) {
+    setToken(token);
+    // api._headers = {
+    //   'Content-Type': 'application/json',
+    //   'Authorization': `Bearer ${token}`
+    // };
     console.log(api);
-    loadInitialCards(api);
+    loadInitialCards();
 
     return auth.getContent(token).then((res) => {
       if (res) {
@@ -164,7 +181,7 @@ function App() {
       .catch((error) => console.log(error));
   }
 
-  function loadInitialCards(api) {
+  function loadInitialCards() {
     return api.loadInitialCards()
       .then(initialCards => {
         setCards(initialCards);
