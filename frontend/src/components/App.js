@@ -150,7 +150,6 @@ function App() {
       "Authorization": `Bearer ${token}`
     };
     console.log(api);
-    debugger;
     loadInitialCards(api);
 
     return auth.getContent(token).then((res) => {
