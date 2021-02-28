@@ -18,7 +18,7 @@ export default function Card(props) {
 
     const isOwn = props.card.owner._id === user._id;
     const isLiked = props.card.likes.some(i => i._id === user._id);
-    
+
     const cardDeleteButtonClassName = (
         `element__delete-button ${isOwn ? '' : 'element__delete-button_hidden'}`
     );
