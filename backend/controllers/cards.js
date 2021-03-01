@@ -31,8 +31,7 @@ const deleteCard = (req, res, next) => {
 
 const likeCard = (req, res, next) => {
   const { cardId } = req.params;
-  // const user = req.user._id;
-  const { user } = req;
+  const user = req.user._id;
 
   Card.findByIdAndUpdate(
     cardId,
@@ -48,8 +47,7 @@ const likeCard = (req, res, next) => {
 
 const dislikeCard = (req, res, next) => {
   const { cardId } = req.params;
-  // const user = req.user._id;
-  const { user } = req;
+  const user = req.user._id;
 
   Card.findByIdAndUpdate(
     cardId,
