@@ -149,7 +149,6 @@ function App() {
   }
 
   function getContent(token) {
-    console.log(token, api);
     setToken(token);
     api._headers = {
         'Content-Type': 'application/json',
