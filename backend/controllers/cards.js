@@ -41,6 +41,7 @@ const likeCard = (req, res, next) => {
     .orFail(() => {
       throw new NotFound('Нет карточки с таким ID');
     })
+    .populate(['owner', 'likes'])
     .then((card) => res.send(card))
     .catch(next);
 };
@@ -57,6 +58,7 @@ const dislikeCard = (req, res, next) => {
     .orFail(() => {
       throw new NotFound('Нет карточки с таким ID');
     })
+    .populate(['owner', 'likes'])
     .then((card) => res.send(card))
     .catch(next);
 };
