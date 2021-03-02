@@ -14,8 +14,15 @@ const createCard = (req, res, next) => {
   // const user = req.user._id;
   const { user } = req;
 
+  // Card.create({ name, link, owner: user })
+  //   .then((card) => res.send(card))
+  //   .catch(next);
   Card.create({ name, link, owner: user })
-    .then((card) => res.send(card))
+    .then((card) => {
+      const newCard = Card.findById(card._id)
+        .populate('user');
+      res.send(newCard);
+    })
     .catch(next);
 };
 
