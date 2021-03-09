@@ -94,13 +94,13 @@ function App() {
 
   function handleAddPlaceSubmit(card) {
     api.addNewCard(card)
-      .then(newCard => {
+      .then((newCard) => {
         setCards([newCard, ...cards])
       })
       .then(() => {
         closeAllPopups();
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   }
@@ -169,10 +169,10 @@ function App() {
 
   function loadInitialCards() {
     return api.loadInitialCards()
-      .then(initialCards => {
+      .then((initialCards) => {
         setCards(initialCards);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   }

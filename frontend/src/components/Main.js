@@ -25,7 +25,7 @@ export default function Main(props) {
             </section>
 
             <section className="elements center">
-                {props.cards.map((card, i) => (
+                {props.cards.map((card) => (
                     <Card card={card} key={card._id} onCardClick={props.onCardClick} onCardLike={props.onCardLike} onCardDelete={props.onCardDelete}/>
                 ))}
             </section>
