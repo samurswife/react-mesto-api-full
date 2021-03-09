@@ -30,7 +30,7 @@ function App() {
   const [infoTooltipType, setInfoTooltipType] = React.useState("");
   const [headerLink, setHeaderLink] = React.useState({ text: "Регистрация", className: "", path: "sign-up" });
 
-  const [token, setToken] = React.useState("");
+  // const [token, setToken] = React.useState("");
 
   const history = useHistory();
 
@@ -149,7 +149,7 @@ function App() {
   }
 
   function getContent(token) {
-    setToken(token);
+    // setToken(token);
     api._headers = {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
