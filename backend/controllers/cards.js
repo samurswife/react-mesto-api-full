@@ -16,7 +16,7 @@ const createCard = (req, res, next) => {
   Card.create({ name, link, owner: user })
     // .then((card) => res.send(card))
     .then((card) => {
-      Card.find(card._id)
+      Card.findById(card._id)
         .populate(['owner'])
         .then((newCard) => res.send(newCard));
     })
