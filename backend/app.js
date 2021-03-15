@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 /* eslint-disable semi */
 /* eslint-disable quotes */
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');

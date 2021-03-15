@@ -3,12 +3,18 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const { Conflict, NotFound } = require('../errors/index');
 
+const { NODE_ENV, JWT_SECRET } = process.env;
+
 const login = (req, res, next) => {
   const { email, password } = req.body;
 
   return User.findUserByCredentials(email, password)
     .then((user) => {
-      const token = jwt.sign({ _id: user._id }, 'b18d360a0cc0c48434f7db51d7b6952e395eaeb95cbe67aab2160e6f70852ea5', { expiresIn: 3600000 * 24 * 7 });
+      const token = jwt.sign(
+        { _id: user._id },
+        NODE_ENV === 'production' ? JWT_SECRET : 'b18d360a0cc0c48434f7db51d7b6952e395eaeb95cbe67aab2160e6f70852ea5',
+        { expiresIn: 3600000 * 24 * 7 },
+      );
       res.send({ token });
     })
     .catch(next);
