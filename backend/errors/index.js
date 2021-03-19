@@ -8,4 +8,4 @@ module.exports = {
   Unauthorized,
   Forbidden,
   Conflict,
-}
+};

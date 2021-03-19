@@ -1,6 +1,6 @@
 const Card = require('../models/card');
 
-const { NotFound } = require('../errors/index');
+const { NotFound, Forbidden } = require('../errors/index');
 
 const getCards = (req, res, next) => {
   Card.find({})
@@ -24,12 +24,21 @@ const createCard = (req, res, next) => {
 
 const deleteCard = (req, res, next) => {
   const { cardId } = req.params;
+  const { user } = req;
 
-  Card.findByIdAndRemove(cardId)
+  Card.findById(cardId)
     .orFail(() => {
       throw new NotFound('Нет карточки с таким ID');
     })
-    .then((card) => res.send(card))
+    .populate(['owner'])
+    .then((card) => {
+      if (user._id !== card.owner._id.toString()) {
+        throw new Forbidden('Это не ваша карточка, вы не можете ее удалить :-Р');
+      } else {
+        Card.findByIdAndRemove(cardId)
+          .then((deletedCard) => res.send(deletedCard));
+      }
+    })
     .catch(next);
 };
 

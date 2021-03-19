@@ -5,7 +5,6 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const { errors } = require('celebrate');
 const cors = require('cors');
 
 const { PORT = 3000 } = process.env;
@@ -58,17 +57,13 @@ app.get('/crash-test', () => {
 app.post('/signup', signup, createUser);
 app.post('/signin', signin, login);
 
-app.use(auth);
-
-app.use('/users', routerUsers);
-app.use('/cards', routerCards);
+app.use('/users', auth, routerUsers);
+app.use('/cards', auth, routerCards);
 app.use('/', () => {
   throw new NotFound('Запрашиваемый ресурс не найден');
 });
 
 app.use(errorLogger);
-
-app.use(errors());
 
 app.use(errorHandler);
 

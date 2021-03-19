@@ -6,13 +6,11 @@ const userDataValidator = celebrate({
       .messages({
         'string.min': 'Минимум 2 символа',
         'string.max': 'Максимум 30 символов',
-        'any.required': 'Это поле обязательно для заполнения',
       }),
     about: Joi.string().min(2).max(30)
       .messages({
         'string.min': 'Минимум 2 символа',
         'string.max': 'Максимум 30 символов',
-        'any.required': 'Это поле обязательно для заполнения',
       }),
   }),
 });
