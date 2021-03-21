@@ -1,6 +1,6 @@
 const Card = require('../models/card');
 
-const { NotFound, Forbidden } = require('../errors/index');
+const { NotFound, Conflict } = require('../errors/index');
 
 const getCards = (req, res, next) => {
   Card.find({})
@@ -33,7 +33,7 @@ const deleteCard = (req, res, next) => {
     .populate(['owner'])
     .then((card) => {
       if (user._id !== card.owner._id.toString()) {
-        throw new Forbidden('Это не ваша карточка, вы не можете ее удалить :-Р');
+        throw new Conflict('Это не ваша карточка, вы не можете ее удалить :-Р');
       } else {
         Card.findByIdAndRemove(cardId)
           .then((deletedCard) => res.send(deletedCard));
