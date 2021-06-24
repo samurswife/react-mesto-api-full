@@ -108,14 +108,4 @@ class Api {
     }
 }
 
-// const api = new Api({
-//     baseUrl: 'https://api.shakarova.students.nomoreparties.space',
-//     headers: {
-//         'Content-Type': 'application/json',
-//         "Authorization": `Bearer ${localStorage.getItem('token')}`
-//     }
-// });
-
-// export { api };
-
 export { Api };

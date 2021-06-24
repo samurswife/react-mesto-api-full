@@ -1,4 +1,4 @@
-const BASE_URL = 'https://api.shakarova.students.nomoreparties.space';
+const BASE_URL = 'https://api.shakarova.nomoredomains.monster';
 
 const checkResponse = (response) => response.ok ? response.json() : response.statusCode;
 

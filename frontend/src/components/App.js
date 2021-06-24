@@ -32,7 +32,7 @@ function App() {
   const history = useHistory();
 
   let api = new Api({
-    baseUrl: 'https://api.shakarova.students.nomoreparties.space',
+    baseUrl: 'https://api.shakarova.nomoredomains.monster',
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${localStorage.getItem('token')}`
