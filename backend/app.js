@@ -9,13 +9,24 @@ const cors = require('cors');
 
 const { PORT = 3000 } = process.env;
 
+// const options = {
+//   origin: [
+//     'http://localhost:8080',
+//     'https://shakarova.students.nomoreparties.space',
+//     'https://www.shakarova.students.nomoreparties.space',
+//     'http://shakarova.students.nomoreparties.space',
+//     'http://www.shakarova.students.nomoreparties.space',
+//   ],
+//   methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+//   preflightContinue: false,
+//   optionsSuccessStatus: 204,
+//   allowedHeaders: ['Content-Type', 'origin', 'Authorization'],
+//   credentials: true,
+// };
+
 const options = {
   origin: [
-    'http://localhost:8080',
-    'https://shakarova.students.nomoreparties.space',
-    'https://www.shakarova.students.nomoreparties.space',
-    'http://shakarova.students.nomoreparties.space',
-    'http://www.shakarova.students.nomoreparties.space',
+    '*'
   ],
   methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
   preflightContinue: false,
